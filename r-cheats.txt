@@ -1,0 +1,11 @@
+# Stack-trace in R:
+traceback()
+
+# Break on error in R:
+options(error=recover)
+
+# trim off the 1st and last chars of a string:
+substr("hello", start=2, stop=nchar("hello") - 1)
+
+# the apply most similar to haskell's (map f [1..20])
+mapply(f, 1:20)
