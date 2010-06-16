@@ -9,3 +9,11 @@ substr("hello", start=2, stop=nchar("hello") - 1)
 
 # the apply most similar to haskell's (map f [1..20])
 mapply(f, 1:20)
+
+# find difference between neighboring values
+diff(1:10) # returns nine 1s
+
+# Run Length Encoding
+rle(...)
+inverse.rle(...)
+
