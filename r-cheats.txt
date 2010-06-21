@@ -19,3 +19,6 @@ inverse.rle(...)
 
 # getting a substring
 substr(celFileName, start = 1, stop = nchar(celFileName) - 4)
+
+# find string manipulation functions
+help.search(keyword="character")
