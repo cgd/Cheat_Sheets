@@ -17,3 +17,5 @@ diff(1:10) # returns nine 1s
 rle(...)
 inverse.rle(...)
 
+# getting a substring
+substr(celFileName, start = 1, stop = nchar(celFileName) - 4)
