@@ -20,5 +20,8 @@ inverse.rle(...)
 # getting a substring
 substr(celFileName, start = 1, stop = nchar(celFileName) - 4)
 
+# replace file extension with empty string
+sub("\\..*$", "", "helloworld.exe")
+
 # find string manipulation functions
 help.search(keyword="character")
