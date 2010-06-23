@@ -25,3 +25,6 @@ sub("\\..*$", "", "helloworld.exe")
 
 # find string manipulation functions
 help.search(keyword="character")
+
+# Here is the R version of haskell's zipWith
+mapply(get("+"), as.list(1 : 10), as.list(31: 40), SIMPLIFY = F)
