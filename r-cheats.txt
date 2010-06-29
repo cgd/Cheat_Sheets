@@ -9,6 +9,10 @@ substr("hello", start=2, stop=nchar("hello") - 1)
 
 # the apply most similar to haskell's (map f [1..20])
 mapply(f, 1:20)
+# if you would rather have a vector than a list you can do
+mapply(f, 1:20)
+# Here is the R version of haskell's zipWith
+mapply(get("+"), as.list(1 : 10), as.list(31: 40), SIMPLIFY = F)
 
 # find difference between neighboring values
 diff(1:10) # returns nine 1s
@@ -25,6 +29,3 @@ sub("\\..*$", "", "helloworld.exe")
 
 # find string manipulation functions
 help.search(keyword="character")
-
-# Here is the R version of haskell's zipWith
-mapply(get("+"), as.list(1 : 10), as.list(31: 40), SIMPLIFY = F)
