@@ -29,3 +29,7 @@ sub("\\..*$", "", "helloworld.exe")
 
 # find string manipulation functions
 help.search(keyword="character")
+
+# file stuff
+myPath <- file.path(baseDir, "tmp.txt")
+if(file.exists(myPath)) file(description = myPath, open = "rt") # open can be: rt, wt, rb, rb, at ...
