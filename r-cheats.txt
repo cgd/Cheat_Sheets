@@ -2,7 +2,10 @@
 traceback()
 
 # Break on error in R:
-options(error=recover)
+options(error = recover)
+
+# Turn warnings into errors
+options(warn = 2)
 
 # trim off the 1st and last chars of a string:
 substr("hello", start=2, stop=nchar("hello") - 1)
