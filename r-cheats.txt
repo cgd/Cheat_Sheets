@@ -43,4 +43,5 @@ Creating binary packages on windows:
  * Install latest version of Rtools (refer to http://cran.r-project.org/doc/manuals/R-admin.html#The-Windows-toolset)
  * make sure that the R and Rtools bin dirs are on your %PATH%
  * If you have your R code in a tarball or zip file you need to unzip it.
+ * Enter: "Rcmd check <package_src_dir>" to check on any package errors or warnings
  * Enter: "Rcmd build --binary <package_src_dir>" on the command line
