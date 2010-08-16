@@ -36,3 +36,11 @@ help.search(keyword="character")
 # file stuff
 myPath <- file.path(baseDir, "tmp.txt")
 if(file.exists(myPath)) file(description = myPath, open = "rt") # open can be: rt, wt, rb, rb, at ...
+
+Creating binary packages on windows:
+====================================
+ * Install latest version of R (choosing non-default install location is OK)
+ * Install latest version of Rtools (refer to http://cran.r-project.org/doc/manuals/R-admin.html#The-Windows-toolset)
+ * make sure that the R and Rtools bin dirs are on your %PATH%
+ * If you have your R code in a tarball or zip file you need to unzip it.
+ * Enter: "Rcmd build --binary <package_src_dir>" on the command line
