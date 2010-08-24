@@ -1,3 +1,6 @@
+# start in 64 bit mode:
+R --arch x86_64
+
 # Stack-trace in R:
 traceback()
 
