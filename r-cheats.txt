@@ -47,6 +47,9 @@ get("varname")
 # setting terminal width
 options(width=Sys.getenv("COLUMNS"))
 
+# shuffle a vector
+sample(1 : 30)
+
 Creating binary packages on windows:
 ====================================
  * Install latest version of R (choosing non-default install location is OK)
