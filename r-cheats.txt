@@ -1,3 +1,7 @@
+# attach and detach a package:
+library("MouseDivGeno")
+detach(package:MouseDivGeno)
+
 # start in 64 bit mode:
 R --arch x86_64
 
