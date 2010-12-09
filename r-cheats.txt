@@ -43,6 +43,7 @@ grep("MouseDivGeno",rownames(installed.packages()), value = T)
 # file stuff
 myPath <- file.path(baseDir, "tmp.txt")
 if(file.exists(myPath)) file(description = myPath, open = "rt") # open can be: rt, wt, rb, rb, at ...
+dir.create("some-dir-name")
 
 # Setting and getting using character names
 assign("varname", matrix(1 : 10))
