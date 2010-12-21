@@ -60,6 +60,9 @@ options(width=Sys.getenv("COLUMNS"))
 # shuffle a vector
 sample(1 : 30)
 
+# machine specific info like maximum integer
+.Machine$integer.max
+
 Creating binary packages on windows:
 ====================================
  * Install latest version of R (choosing non-default install location is OK)
