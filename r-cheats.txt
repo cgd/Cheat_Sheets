@@ -93,7 +93,10 @@ sample(1 : 30)
   9.390   0.061   9.427
 > system.time(for(i in 1:10000) { sweep(x, 2, y) })
    user  system elapsed 
-  1.178   0.009   1.184 
+  1.178   0.009   1.184
+> system.time(for(i in 1:10000) { t(t(x) - y) })
+   user  system elapsed 
+  0.391   0.007   0.398 
 > system.time(for(i in 1:10000) { x - matrix(y, nrow(x), ncol(x), byrow = T) })
    user  system elapsed 
   0.233   0.002   0.235 
