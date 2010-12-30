@@ -69,6 +69,61 @@ sample(1 : 30)
 # machine specific info like maximum integer
 .Machine$integer.max
 
+####################
+# Performance Tips #
+####################
+
+# crossprod(x,y) is faster than t(x) %*% y
+
+> x = matrix(rnorm(1000), 100, 10)
+> y = matrix(rnorm(1000), 100, 10)
+> system.time(for(i in 1:10000) {  t(x) %*% y })
+   user  system elapsed 
+  0.383   0.006   0.389 
+> system.time(for(i in 1:10000) {  crossprod(x, y) })
+   user  system elapsed 
+  0.165   0.001   0.166 
+
+# When subtracting a vector from each *row* of a matrix, subtracting a matrix is faster than apply(x, 2, "-", y) or sweep(x, 1, y)
+
+> x = matrix(rnorm(1000), 100, 10)
+> y = rnorm(10)
+> system.time(for(i in 1:10000) { apply(x, 1, "-", y) })
+   user  system elapsed 
+  9.390   0.061   9.427
+> system.time(for(i in 1:10000) { sweep(x, 2, y) })
+   user  system elapsed 
+  1.178   0.009   1.184 
+> system.time(for(i in 1:10000) { x - matrix(y, nrow(x), ncol(x), byrow = T) })
+   user  system elapsed 
+  0.233   0.002   0.235 
+
+# Showing the all three methods produce the same result.
+> all(t(apply(x, 1, "-", y)) == x - matrix(y, nrow(x), ncol(x), byrow = T))
+[1] TRUE
+> all(sweep(x, 2, y) == x - matrix(y, nrow(x), ncol(x), byrow = T))
+[1] TRUE
+
+# When subtracting a vector from each *column* of a matrix, x - y is faster than apply(x, 1, "-", y) or sweep(x, 2, y)
+
+> x = matrix(rnorm(1000), 100, 10)
+> y = rnorm(100)
+> system.time(for(i in 1:10000) { apply(x, 2, "-", y) })
+   user  system elapsed 
+  2.985   0.024   3.039 
+> system.time(for(i in 1:10000) { sweep(x, 1, y) })
+   user  system elapsed 
+  1.180   0.008   1.187  
+> system.time(for(i in 1:10000) { x - y })
+   user  system elapsed 
+  0.070   0.001   0.071 
+
+# Showing the all three methods produce the same result.
+> all(apply(x, 2, "-", y) == x - y)
+[1] TRUE
+> all(sweep(x, 1, y) == x - y)
+[1] TRUE
+
 Creating binary packages on windows:
 ====================================
  * Install latest version of R (choosing non-default install location is OK)
