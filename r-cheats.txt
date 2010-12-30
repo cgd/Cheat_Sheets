@@ -14,6 +14,9 @@ options(error = recover)
 # Turn warnings into errors
 options(warn = 2)
 
+# Acts as a code break-point so you can inspect vars
+browser()
+
 # trim off the 1st and last chars of a string:
 substr("hello", start=2, stop=nchar("hello") - 1)
 
