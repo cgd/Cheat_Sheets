@@ -140,3 +140,9 @@ Creating binary packages on windows:
  * If you have your R code in a tarball or zip file you need to unzip it.
  * Enter: "Rcmd check <package_src_dir>" to check on any package errors or warnings
  * Enter: "Rcmd build --binary <package_src_dir>" on the command line
+
+Package Installation:
+====================================
+ * from cran install.packages("packageName", repos = "http://cran.r-project.org") NOTE: repos arg is optional. Default is to prompt for a mirror
+ * remove packages: remove.packages("packageName")
+ * find out which library(s) packages are installed to .libPaths()
