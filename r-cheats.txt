@@ -8,7 +8,7 @@ R --arch x86_64
 # you can check if you're running 64 or 32 like:
 if(.Machine$sizeof.pointer == 8) cat("running 64-bit\n")
 else if(.Machine$sizeof.pointer == 4) cat("running 32-bit\n")
-else cat("whichcraft!\n")
+else cat("witchcraft!\n")
 
 # Stack-trace in R:
 traceback()
