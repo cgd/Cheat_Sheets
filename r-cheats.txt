@@ -28,7 +28,7 @@ substr("hello", start=2, stop=nchar("hello") - 1)
 # the apply most similar to haskell's (map f [1..20])
 mapply(f, 1:20)
 # if you would rather have a vector than a list you can do
-sapply(f, 1:20)
+sapply(1:20, f)
 # Here is the R version of haskell's zipWith
 mapply(get("+"), as.list(1 : 10), as.list(31: 40), SIMPLIFY = F)
 # apply a function to matrix margins first by row then by column
