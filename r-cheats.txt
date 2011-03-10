@@ -74,6 +74,9 @@ sample(1 : 30)
 # machine specific info like maximum integer
 .Machine$integer.max
 
+# Get the means of a vector split on several levels.
+sapply(split(values, factor), mean)
+
 ####################
 # Performance Tips #
 ####################
@@ -131,6 +134,55 @@ sample(1 : 30)
 [1] TRUE
 > all(sweep(x, 1, y) == x - y)
 [1] TRUE
+
+# Fast Linear Model Tips
+# Suppose that you have ten predictors in your model.
+n = 100
+p = 10
+y = rnorm(n)
+x = matrix(rnorm(n * p), n, p)
+mod = lm(y ~ x)
+
+# The Choleski factorization and using solve(crossprod(x)) %*% x %*% y will fail of t(x) %*% x is ill-conditioned.
+# Choleski is the fastest method.  But the QR decomposition does not calculate t(x) %*% x and can be more stable.
+# Basic usage is to make a QT decomposition of x and then call qr.coef(), qr.fitted() or qr.resid().
+x_with_intercept = matrix(c(rep(1, n), x), n, p + 1)
+qrx = qr(x_with_intercept)
+coef = qr.coef(qrx, y)
+# Values are the same.
+all(mod$coef == coef)
+[1] TRUE
+
+###
+# The QR decomposition can be saved and used for permutations.
+
+# Normal method using lm().
+nperm = 1000
+fstat = rep(1, nperm)
+system.time(for(i in 1:nperm) {
+  y = sample(y)
+  mod = lm(y ~ x)
+  fstat[i] = summary(mod)$fstatistic[1]
+})
+   user  system elapsed 
+  3.321   0.024   3.367 
+
+# Using the QR decomposition.
+x_with_intercept = matrix(c(rep(1, n), x), n, p + 1)
+qrx = qr(x_with_intercept)
+sst = crossprod(y - mean(y))
+fstat2 = rep(0, nperm)
+df1 = ncol(x)
+df2 = length(y) - ncol(x) - 1
+fstat.factor = df2 / df1
+system.time(for(i in 1:nperm) {
+  y = sample(y)
+  sse = crossprod(qr.resid(qrx, y))
+  fstat2[i] = (sst - sse) / sse * fstat.factor
+})
+   user  system elapsed 
+  0.118   0.000   0.120 
+
 
 Creating binary packages on windows:
 ====================================
