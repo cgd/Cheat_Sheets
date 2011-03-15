@@ -183,6 +183,35 @@ system.time(for(i in 1:nperm) {
    user  system elapsed 
   0.118   0.000   0.120 
 
+#####
+# Indexing through 3-dimensional arrays.
+# Because of the way that R stores arrays, it's faster to place the longest dimension in dim[[2]] or dim[[3]].
+# To demonstrate this, I make three arrays with the long dimension in dim[[1]], [[2]] & [[3]] and show the timing
+# of looping through the longest dimension and doing some work.  The savings in this case is a factor of 3.
+
+> y = rnorm(100)
+> 
+> x = array(rnorm(1000), c(10000, 100, 100))
+> system.time(for(i in 1:dim(x)[[1]]) {
++  a = x[i,,] %*% y
++ })
+   user  system elapsed 
+ 19.377   7.495  25.633 
+> 
+> x = array(rnorm(1000), c(100, 10000, 100))
+> system.time(for(i in 1:dim(x)[[2]]) {
++  a = x[,i,] %*% y
++ })
+   user  system elapsed 
+  4.568   5.003   8.405 
+> 
+> x = array(rnorm(1000), c(100, 100, 10000))
+> system.time(for(i in 1:dim(x)[[3]]) {
++  a = x[,,i] %*% y
++ })
+   user  system elapsed 
+  4.522   4.996   8.330 
+
 
 Creating binary packages on windows:
 ====================================
