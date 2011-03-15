@@ -77,9 +77,9 @@ sample(1 : 30)
 # Get the means of a vector split on several levels.
 sapply(split(values, factor), mean)
 
-####################
+#################
 # Performance Tips #
-####################
+#################
 
 # crossprod(x,y) is faster than t(x) %*% y
 
@@ -211,6 +211,20 @@ system.time(for(i in 1:nperm) {
 + })
    user  system elapsed 
   4.522   4.996   8.330 
+
+#####
+# It's faster to allocate the memory you need before using it.  For example, if
+# you are adding numbers to a vector and don't know how many you'll have, it's
+# better to pre-allocate too much memory.
+a = 0
+system.time(for(i in 1:10000) {
+  a = c(a, runif(1))
+})
+
+a = rep(0, 10000)
+system.time(for(i in 1:10000) {
+  a[i] = runif(1)
+})
 
 
 Creating binary packages on windows:
